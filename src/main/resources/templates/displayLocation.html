@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Locations</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h3 {
+            color: #f0f0f0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        td {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+<h3>Locations</h3>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Type</th>
+    </tr>
+
+    <!-- Use Thymeleaf's syntax to access model attribute -->
+    <th:block th:each="location : ${locations}">
+        <tr>
+            <td th:text="${location.id}"></td>
+            <td th:text="${location.code}"></td>
+            <td th:text="${location.name}"></td>
+            <td th:text="${location.type}"></td>
+        </tr>
+    </th:block>
+
+</table>
+
+</body>
+</html>

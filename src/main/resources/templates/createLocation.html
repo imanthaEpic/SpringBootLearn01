@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            width: 500px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"], input[type="radio"] {
+            padding: 8px;
+            margin-bottom: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            margin-left: -8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #f0f0f0;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+            transform: translateY(2px); /* Adjust vertical alignment */
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            color: #121212;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        a {
+            color: #f0f0f0;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+            margin-left: 20px; /* Adjust left margin */
+            position: absolute;
+            top: 20px; /* Adjust top position */
+            left: 20px; /* Adjust left position */
+            padding: 10px 14px;
+            background-color: chocolate;
+            border-radius: 12px;
+        }
+
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        label {
+            display : flex;
+            padding :10px;
+            gap :2em;
+            align-items : center
+        }
+
+        .alert {
+            display: block;
+            position: absolute;
+            top: 20px;
+            left: 200px;
+        }
+
+        .container {
+            width :20px;
+            aspect-ratio : 1;
+            overflow : hidden;
+            border-radius : 50%;
+            box-shadow : 2px 5px 5px rgba(0,0,0,0.2);
+        }
+
+        .cRadioBtn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: #fff;
+            position: relative;
+            border: solid 5px var(--border-color);
+            box-sizing: border-box;
+            transition: all 0.1s ease-in;
+            cursor: pointer;
+
+        }
+
+        .cRadioBtn:hover {
+            border: solid 8px var(--primary);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--secondary);
+        }
+
+        .check:checked + label > .container > .cRadioBtn > .overlay {
+            background: #fff;
+            animation: shrink 0.3s ease-in-out forwards;
+        }
+
+        .check:checked + label > .container  > .cRadioBtn {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .drops {
+            position: absolute;
+            background: #fc922f;
+            top: -100%;
+            left: 50%;
+            transform: translate(-50%);
+            border-radius: 50%;
+            aspect-ratio: 1;
+        }
+
+        .lgDrop {
+            width: 50%;
+        }
+
+        .xsDrop {
+            width: 20%;
+        }
+
+        .mdDrop {
+            width: 30%;
+        }
+
+        .check:checked + label > .container  > .cRadioBtn > .lgDrop {
+            animation: drop 0.5s ease-in-out forwards;
+        }
+
+        .check:checked + label > .container  > .cRadioBtn > .mdDrop {
+            animation: drop 0.8s ease-in forwards;
+        }
+
+        .check:checked + label > .container  > .cRadioBtn > .xsDrop {
+            animation: drop 0.9s linear forwards;
+        }
+
+        @keyframes drop {
+            0% {
+                top: -100%;
+            }
+            50% {
+                top: -100%;
+            }
+            75% {
+                top: 10%;
+            }
+            100% {
+                top: 25%;
+            }
+        }
+
+        @keyframes shrink {
+            0% {
+                width: 100%;
+            }
+            100% {
+                width: 0px;
+            }
+        }
+
+        /* Popup box */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 70%; /* Full width */
+            height: 70%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        /* Modal content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            color: #121212;
+            border: 1px solid #888;
+            border-radius: 5px;
+            width: 50%; /* Could be more or less, depending on content */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Close button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Modal dialog -->
+<div id="myModal" class="modal">
+    <div id="successMessage" class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modalMessage"></p>
+    </div>
+</div>
+
+<form method="post" action="saveLoc">
+    <label for="id">ID:</label>
+    <input type="text" id="id" name="id"/>
+
+    <label for="code">Code:</label>
+    <input type="text" id="code" name="code"/>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"/>
+
+    <div class="main">
+        <input type="radio" class="check" id="radio1" name="type" value="Urban"/>
+        <label for="radio1">
+            <div class="container">
+                <div class="cRadioBtn">
+                    <div class="overlay"></div>
+                    <div class="drops xsDrop"></div>
+                    <div class="drops mdDrop"></div>
+                    <div class="drops lgDrop"></div>
+                </div>
+            </div>
+            <h5>Urban</h5>
+        </label>
+        <input type="radio" class="check" id="radio2" name="type" value="Rural" />
+        <label for="radio2">
+            <div class="container">
+                <div class="cRadioBtn">
+                    <div class="overlay"></div>
+                    <div class="drops xsDrop"></div>
+                    <div class="drops mdDrop"></div>
+                    <div class="drops lgDrop"></div>
+                </div>
+            </div>
+            <h5>Rural</h5>
+        </label>
+    </div>
+
+    <button type="submit" class="red">Save</button>
+</form>
+
+<a href="displayLocations">View All</a>
+
+<script>
+    // Show modal dialog when message is present
+    var message = "Location saved with successfully!";
+    if (message !== "") {
+        var modal = document.getElementById("myModal");
+        var modalMessage = document.getElementById("modalMessage");
+        modalMessage.textContent = message;
+        modal.style.display = "block";
+
+        // Hide modal after 3 seconds
+        setTimeout(function() {
+            modal.style.display = "none";
+        }, 3000);
+    }
+
+    // Close the modal when the user clicks on the close button
+    var closeBtn = document.getElementsByClassName("close")[0];
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+</script>
+
+</body>
+</html>
