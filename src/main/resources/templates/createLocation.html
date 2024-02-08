@@ -248,9 +248,9 @@
 
 <!-- Modal dialog -->
 <div id="myModal" class="modal">
-    <div id="successMessage" class="modal-content">
+    <div id="successMessage" th:if="${msg}" class="modal-content">
         <span class="close">&times;</span>
-        <p id="modalMessage"></p>
+        <p id="modalMessage" th:text="${msg}"></p>
     </div>
 </div>
 
@@ -297,9 +297,9 @@
 <a href="displayLocations">View All</a>
 
 <script>
-    // Show modal dialog when message is present
-    var message = "Location saved with successfully!";
-    if (message !== "") {
+    // Show modal dialog if message is present
+    var message = "[[${msg}]]"; // Enclose ${msg} in quotes
+    if (message) {
         var modal = document.getElementById("myModal");
         var modalMessage = document.getElementById("modalMessage");
         modalMessage.textContent = message;
@@ -316,6 +316,7 @@
     closeBtn.onclick = function() {
         modal.style.display = "none";
     }
+
 </script>
 
 </body>

@@ -37,6 +37,33 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
+        .deleteBtn {
+            text-decoration: none;
+            padding: 8px 6px;
+            background: red;
+            color: white;
+            border-radius: 10px;
+        }
+
+        .deleteBtn:hover{
+            background: #5f0000;
+            text-decoration: underline;
+        }
+
+        .updateBtn {
+            text-decoration: none;
+            padding: 8px 6px;
+            background: yellow;
+            margin-left: 10px;
+            color: black;
+            border-radius: 10px;
+        }
+
+        .updateBtn:hover{
+            background: #656502;
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 <body>
@@ -48,6 +75,7 @@
         <th>Code</th>
         <th>Name</th>
         <th>Type</th>
+        <th>Action</th>
     </tr>
 
     <!-- Use Thymeleaf's syntax to access model attribute -->
@@ -57,10 +85,16 @@
             <td th:text="${location.code}"></td>
             <td th:text="${location.name}"></td>
             <td th:text="${location.type}"></td>
+            <td>
+                <a class="deleteBtn" th:href="@{'/deleteLocation?id=' + ${location.id}}">Delete</a>
+                <a class="updateBtn" th:href="@{'/updateLocation?id=' + ${location.id}}">Update</a>
+            </td>
         </tr>
     </th:block>
 
 </table>
+
+<a href="showCreate">Add New Location</a>
 
 </body>
 </html>
