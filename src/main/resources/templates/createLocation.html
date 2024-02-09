@@ -3,307 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            background-color: #121212;
-            color: #f0f0f0;
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
+    <link href="/CSS/styles.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-        form {
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 20px;
-            width: 500px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        input[type="text"], input[type="radio"] {
-            padding: 8px;
-            margin-bottom: 10px;
-            width: 100%;
-            border: none;
-            border-radius: 5px;
-            margin-left: -8px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #f0f0f0;
-        }
-
-        input[type="radio"] {
-            margin-right: 5px;
-            transform: translateY(2px); /* Adjust vertical alignment */
-        }
-
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #f0f0f0;
-            color: #121212;
-            cursor: pointer;
-            margin-top: 20px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        a {
-            color: #f0f0f0;
-            text-decoration: none;
-            display: block;
-            margin-top: 10px;
-            margin-left: 20px; /* Adjust left margin */
-            position: absolute;
-            top: 20px; /* Adjust top position */
-            left: 20px; /* Adjust left position */
-            padding: 10px 14px;
-            background-color: chocolate;
-            border-radius: 12px;
-        }
-
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        input[type="radio"] {
-            display: none;
-        }
-
-        label {
-            display : flex;
-            padding :10px;
-            gap :2em;
-            align-items : center
-        }
-
-        .alert {
-            display: block;
-            position: absolute;
-            top: 20px;
-            left: 200px;
-        }
-
-        .container {
-            width :20px;
-            aspect-ratio : 1;
-            overflow : hidden;
-            border-radius : 50%;
-            box-shadow : 2px 5px 5px rgba(0,0,0,0.2);
-        }
-
-        .cRadioBtn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            aspect-ratio: 1;
-            border-radius: 50%;
-            background: #fff;
-            position: relative;
-            border: solid 5px var(--border-color);
-            box-sizing: border-box;
-            transition: all 0.1s ease-in;
-            cursor: pointer;
-
-        }
-
-        .cRadioBtn:hover {
-            border: solid 8px var(--primary);
-        }
-
-        .overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            aspect-ratio: 1;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--secondary);
-        }
-
-        .check:checked + label > .container > .cRadioBtn > .overlay {
-            background: #fff;
-            animation: shrink 0.3s ease-in-out forwards;
-        }
-
-        .check:checked + label > .container  > .cRadioBtn {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .drops {
-            position: absolute;
-            background: #fc922f;
-            top: -100%;
-            left: 50%;
-            transform: translate(-50%);
-            border-radius: 50%;
-            aspect-ratio: 1;
-        }
-
-        .lgDrop {
-            width: 50%;
-        }
-
-        .xsDrop {
-            width: 20%;
-        }
-
-        .mdDrop {
-            width: 30%;
-        }
-
-        .check:checked + label > .container  > .cRadioBtn > .lgDrop {
-            animation: drop 0.5s ease-in-out forwards;
-        }
-
-        .check:checked + label > .container  > .cRadioBtn > .mdDrop {
-            animation: drop 0.8s ease-in forwards;
-        }
-
-        .check:checked + label > .container  > .cRadioBtn > .xsDrop {
-            animation: drop 0.9s linear forwards;
-        }
-
-        @keyframes drop {
-            0% {
-                top: -100%;
-            }
-            50% {
-                top: -100%;
-            }
-            75% {
-                top: 10%;
-            }
-            100% {
-                top: 25%;
-            }
-        }
-
-        @keyframes shrink {
-            0% {
-                width: 100%;
-            }
-            100% {
-                width: 0px;
-            }
-        }
-
-        /* Popup box */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 70%; /* Full width */
-            height: 70%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-        }
-
-        /* Modal content */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            color: #121212;
-            border: 1px solid #888;
-            border-radius: 5px;
-            width: 50%; /* Could be more or less, depending on content */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Close button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-    </style>
 </head>
-<body>
+<body class="bg-gray-100">
 
 <!-- Modal dialog -->
-<div id="myModal" class="modal">
-    <div id="successMessage" th:if="${msg}" class="modal-content">
-        <span class="close">&times;</span>
-        <p id="modalMessage" th:text="${msg}"></p>
+<div id="myModal" th:if="${msg}" class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+    <div id="successMessage" class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+        </svg>
+        <span class="sr-only">Check icon</span>
     </div>
+    <div class="ms-3 text-sm font-normal" id="modalMessage" th:text="${msg}">&times;</div>
+    <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex ml-6 items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-success" aria-label="Close">
+        <span class="sr-only">Close</span>
+        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+        </svg>
+    </button>
 </div>
 
-<form method="post" action="saveLoc">
-    <label for="id">ID:</label>
-    <input type="text" id="id" name="id"/>
 
-    <label for="code">Code:</label>
-    <input type="text" id="code" name="code"/>
+<form method="post" action="saveLoc" class="max-w-md mx-auto bg-white p-8 mt-10 rounded-lg shadow-lg">
+    <label for="id" class="block mb-2">ID:</label>
+    <input type="text" id="id" name="id" class="w-full border border-gray-300 rounded-md py-2 px-3 mb-3"/>
 
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name"/>
+    <label for="code" class="block mb-2">Code:</label>
+    <input type="text" id="code" name="code" class="w-full border border-gray-300 rounded-md py-2 px-3 mb-3"/>
 
-    <div class="main">
-        <input type="radio" class="check" id="radio1" name="type" value="Urban"/>
-        <label for="radio1">
-            <div class="container">
-                <div class="cRadioBtn">
-                    <div class="overlay"></div>
-                    <div class="drops xsDrop"></div>
-                    <div class="drops mdDrop"></div>
-                    <div class="drops lgDrop"></div>
-                </div>
-            </div>
-            <h5>Urban</h5>
+    <label for="name" class="block mb-2">Name:</label>
+    <input type="text" id="name" name="name" class="w-full border border-gray-300 rounded-md py-2 px-3 mb-3"/>
+
+    <div class="main flex items-center mt-1.5 mb-6">
+        <input type="radio" id="radio1" name="type" value="Urban" class="check visually-hidden"/>
+        <label for="radio1" class="flex items-center mr-6 cursor-pointer">
+
+            <h5 class="ml-1.5">Urban</h5>
         </label>
-        <input type="radio" class="check" id="radio2" name="type" value="Rural" />
-        <label for="radio2">
-            <div class="container">
-                <div class="cRadioBtn">
-                    <div class="overlay"></div>
-                    <div class="drops xsDrop"></div>
-                    <div class="drops mdDrop"></div>
-                    <div class="drops lgDrop"></div>
-                </div>
-            </div>
-            <h5>Rural</h5>
+        <input type="radio" id="radio2" name="type" value="Rural" class="check visually-hidden"/>
+        <label for="radio2" class="flex items-center cursor-pointer">
+
+            <h5 class="ml-1.5">Rural</h5>
         </label>
     </div>
 
-    <button type="submit" class="red">Save</button>
+    <button type="submit" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+            Save
+        </span>
+    </button>
 </form>
 
-<a href="displayLocations">View All</a>
+<a href="displayLocations" class="block text-center mt-4">
+    <button type="button" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">View All</button>
+</a>
 
 <script>
     // Show modal dialog if message is present
     var message = "[[${msg}]]"; // Enclose ${msg} in quotes
-    if (message) {
+    if (message && message.trim() !== "") {
         var modal = document.getElementById("myModal");
         var modalMessage = document.getElementById("modalMessage");
         modalMessage.textContent = message;
-        modal.style.display = "block";
+        modal.style.display = "flex";
 
         // Hide modal after 3 seconds
         setTimeout(function() {
