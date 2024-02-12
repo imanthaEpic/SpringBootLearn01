@@ -47,18 +47,6 @@ public class LocationController {
          return "displayLocation";
     }
 
-//    @RequestMapping("/deleteLocation")
-//    public String deleteLocation(@RequestParam("id") int id) {
-//        Optional<Location> locationOptional= service.getLocationById(id);
-//        if (locationOptional.isPresent()) {
-//            Location locationDel = locationOptional.get();
-//            service.deleteLocation(locationDel);
-//            List<Location> locationList = service.getAllLocation();
-//            return "redirect:/displayLocations";
-//        } else {
-//            return "redirect:/deleteLocations";
-//        }
-//    }
     @RequestMapping("deleteLocation")
     public String deleteLocation(@RequestParam("id") int id, ModelMap modelMap){
         Location location = new Location();
@@ -69,15 +57,24 @@ public class LocationController {
         return "displayLocation";
     }
 
-    @RequestMapping("/updateLocation")
+    @RequestMapping("/showUpdate")
     public String showUpdate(@RequestParam("id") int id, ModelMap modelMap) {
         Optional<Location> locationOptional = service.getLocationById(id);
         if (locationOptional.isPresent()) {
-            modelMap.addAttribute("location", locationOptional.get());
+            Location location = locationOptional.get();
+            modelMap.addAttribute("location", location);
         } else {
             System.out.println("Error!");
         }
-        return "editLocation";
+        return "updateLocation";
+    }
+
+    @RequestMapping("/updateLoc")
+    public String updateLocation(@ModelAttribute("location") Location location, ModelMap modelMap) {
+        service.updateLocation(location);
+        List<Location> locations = service.getAllLocation();
+        modelMap.addAttribute("locations", locations);
+        return "displayLocation";
     }
 
     @ModelAttribute("showMessage")
